@@ -215,7 +215,6 @@ private void configurarBotones() {
         productos.add(prod);
 
         JOptionPane.showMessageDialog(this, "Producto Guardado");
-        limpiarCampos();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
