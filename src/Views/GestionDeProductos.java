@@ -23,6 +23,7 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
     public GestionDeProductos(HashSet<Producto> productos) {
         initComponents();
         this.productos = productos;
+        configurarBotones();
     }
 
     /**
@@ -50,6 +51,7 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
         jtPrecio = new javax.swing.JTextField();
         jtStock = new javax.swing.JTextField();
         jcRubro = new javax.swing.JComboBox<>();
+        jbEditar = new javax.swing.JButton();
 
         setTitle("Gestión de Productos");
 
@@ -64,6 +66,11 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
         jLabel5.setText("Strock");
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +102,8 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
 
         jcRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumería" }));
 
+        jbEditar.setText("Editar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +118,7 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jcRubro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,17 +126,22 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
                                 .addComponent(jtPrecio)
                                 .addComponent(jtStock))
                             .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbGuardar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbEditar)
+                        .addGap(12, 12, 12)
                         .addComponent(jbEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbSalir)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(62, 62, 62))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,12 +177,19 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
                     .addComponent(jbEliminar)
-                    .addComponent(jbSalir))
-                .addGap(50, 50, 50))
+                    .addComponent(jbEditar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSalir)
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+private void configurarBotones() {
+//    jbGuardar.setEnabled(false);
+    jbEditar.setEnabled(false);
+    jbEliminar.setEnabled(false);
+}
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         int codigo;
@@ -204,38 +225,61 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        String codigoTexto = jtCodigo.getText(); // Obtener el texto del JTextField
-        String descripcion;
-        double precio;
-        int stock;
 
-        int codigoABuscar = Integer.parseInt(codigoTexto); // Convertir el texto a un número entero
+String codigoTexto = jtCodigo.getText(); // Obtener el texto del JTextField
 
-        Producto productoEncontrado = null;
+// Habilitar o deshabilitar los botones según si se ingresó un valor en el campo de búsqueda
+if (!codigoTexto.isEmpty()) {
+    boolean productoEncontrado = false;
 
-        for (Producto producto : productos) {
-            if (producto.getCodigo() == codigoABuscar) {
-                productoEncontrado = producto;
-                break;
-            }
+    int codigoABuscar = Integer.parseInt(codigoTexto); // Convertir el texto a un número entero
+
+    for (Producto producto : productos) {
+        if (producto.getCodigo() == codigoABuscar) {
+            productoEncontrado = true;
+            break;
         }
+    }
 
-        if (productoEncontrado != null) {
-            descripcion = productoEncontrado.getDescripcion();
-            jtDescripcion.setText(descripcion);
+    jbEditar.setEnabled(productoEncontrado);
+    jbEliminar.setEnabled(productoEncontrado);
+} else {
+    jbEditar.setEnabled(false);
+    jbEliminar.setEnabled(false);
+}
 
-            precio = productoEncontrado.getPrecio();//valor en double
-            String precioEncontrado = String.valueOf(precio); //lo paso a String para setearlo en Jtext
-            jtPrecio.setText(precioEncontrado);
+String descripcion;
+double precio;
+int stock;
 
-            stock = productoEncontrado.getStock();
-            String stockEncontrado = String.valueOf(stock);
-            jtStock.setText(stockEncontrado);
+int codigoABuscar = Integer.parseInt(codigoTexto); // Convertir el texto a un número entero
 
-            JOptionPane.showMessageDialog(null, "Producto encontrado: ");
-        } else {
-            JOptionPane.showMessageDialog(null, "Producto no encontrado con el código: " + codigoTexto);
-        }
+Producto productoEncontrado = null;
+
+for (Producto producto : productos) {
+    if (producto.getCodigo() == codigoABuscar) {
+        productoEncontrado = producto;
+        break;
+    }
+}
+
+if (productoEncontrado != null) {
+    descripcion = productoEncontrado.getDescripcion();
+    jtDescripcion.setText(descripcion);
+
+    precio = productoEncontrado.getPrecio();//valor en double
+    String precioEncontrado = String.valueOf(precio); //lo paso a String para setearlo en Jtext
+    jtPrecio.setText(precioEncontrado);
+
+    stock = productoEncontrado.getStock();
+    String stockEncontrado = String.valueOf(stock);
+    jtStock.setText(stockEncontrado);
+
+    JOptionPane.showMessageDialog(null, "Producto encontrado: ");
+} else {
+    JOptionPane.showMessageDialog(null, "Producto no encontrado con el código: " + codigoTexto);
+}
+
 
 
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -248,10 +292,17 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
                 productos.remove(producto);
                 JOptionPane.showMessageDialog(null, "Producto eliminado");
                 break; // Importante salir del bucle una vez se elimine el producto
-                
+
             }
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+         // Habilitar el botón Guardar al presionar Nuevo y completar todos los campos
+        jbGuardar.setEnabled(true);
+        // Limpiar los campos para ingresar nuevos datos
+        limpiarCampos();
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,6 +312,7 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
@@ -278,5 +330,12 @@ public class GestionDeProductos extends javax.swing.JInternalFrame {
         jtStock.setText("");
         jtPrecio.setText("");
         jcRubro.setSelectedIndex(0);
+       
     }
-}
+
+    }
+    
+   
+
+
+
