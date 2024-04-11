@@ -227,8 +227,7 @@ private void configurarBotones() {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
 String codigoTexto = jtCodigo.getText(); // Obtener el texto del JTextField
-
-// Habilitar o deshabilitar los botones según si se ingresó un valor en el campo de búsqueda
+try {// Habilitar o deshabilitar los botones según si se ingresó un valor en el campo de búsqueda
 if (!codigoTexto.isEmpty()) {
     boolean productoEncontrado = false;
 
@@ -279,6 +278,13 @@ if (productoEncontrado != null) {
 } else {
     JOptionPane.showMessageDialog(null, "Producto no encontrado con el código: " + codigoTexto);
 }
+            
+        } catch (NumberFormatException e) {
+        // Si ocurre una excepción al intentar convertir el texto a un número entero,
+        // mostrar un mensaje de error
+        JOptionPane.showMessageDialog(null, "Campo vacío o valor inválido. Ingrese un número válido.");
+        }
+
 
 
 
