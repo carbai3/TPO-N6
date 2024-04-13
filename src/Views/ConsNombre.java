@@ -5,19 +5,37 @@
  */
 package Views;
 
+import Entidades.Producto;
+import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author carba
  */
 public class ConsNombre extends javax.swing.JInternalFrame {
-
+private TreeSet<Producto> productos;
+private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form ConsRubro
      */
-    public ConsNombre() {
+    public ConsNombre(TreeSet <Producto> productos) {
         initComponents();
+        this.productos=productos;
     }
-
+   private void armarCabecera(){
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+     
+    }
+    public void borrarFilasTabla(){
+        int filas = modelo.getRowCount()-1;
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +49,7 @@ public class ConsNombre extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jtCaractBuscar = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Listado de Productos por Nombre");
@@ -51,9 +69,14 @@ public class ConsNombre extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jtCaractBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtCaractBuscarActionPerformed(evt);
+            }
+        });
+        jtCaractBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtCaractBuscarKeyReleased(evt);
             }
         });
 
@@ -65,7 +88,7 @@ public class ConsNombre extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtCaractBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
@@ -84,7 +107,7 @@ public class ConsNombre extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtCaractBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -93,9 +116,13 @@ public class ConsNombre extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtCaractBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCaractBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtCaractBuscarActionPerformed
+
+    private void jtCaractBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCaractBuscarKeyReleased
+        
+    }//GEN-LAST:event_jtCaractBuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -103,6 +130,6 @@ public class ConsNombre extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtCaractBuscar;
     // End of variables declaration//GEN-END:variables
 }
