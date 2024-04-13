@@ -6,6 +6,8 @@
 package Views;
 
 import Entidades.Producto;
+import java.util.TreeSet;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,12 +15,13 @@ import javax.swing.table.DefaultTableModel;
  * @author carba
  */
 public class ConsRubro extends javax.swing.JInternalFrame {
+private TreeSet<Producto> productos;
+private DefaultTableModel modelo = new DefaultTableModel();
 
-    /**
-     * Creates new form ConsRubro
-     */
-    public ConsRubro() {
+    public ConsRubro(TreeSet<Producto> productos) {
         initComponents();
+        this.productos = productos;
+        armarCabecera();
     }
 
     /**
@@ -39,17 +42,18 @@ public class ConsRubro extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Listado de Productos por Rubro");
 
-        jcRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Perfumeria", "Limpieza", "Comestibles" }));
+        jcRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestibles", "Limpieza", "Perfumeria" }));
         jcRubro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jcRubro.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcRubroItemStateChanged(evt);
+        jcRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcRubroActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Elija rubro:");
 
         jtPorRubro.setAutoCreateRowSorter(true);
+        jtPorRubro.setForeground(new java.awt.Color(0, 0, 0));
         jtPorRubro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -118,12 +122,6 @@ public class ConsRubro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private Producto pd = new Producto();
-    private DefaultTableModel modelo = new DefaultTableModel() {
-        public boolean isCellEditable(int fila, int col) {
-            return false;
-        }
-    };
     private void armarCabecera(){
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
@@ -138,9 +136,23 @@ public class ConsRubro extends javax.swing.JInternalFrame {
         }
     } 
     
-    private void jcRubroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcRubroItemStateChanged
-        String rubro = String.valueOf(jcRubro.getSelectedItem());
-    }//GEN-LAST:event_jcRubroItemStateChanged
+    private void jcRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcRubroActionPerformed
+        borrarFilasTabla();
+        String rubro = (String)jcRubro.getSelectedItem();
+       
+        for(Producto prod:productos){
+          
+            if(rubro.equals(prod.getRubro())){
+                            
+              Vector renglon=new Vector<>();
+              renglon.add(prod.getCodigo());
+              renglon.add(prod.getDescripcion());
+              renglon.add(prod.getPrecio());
+              renglon.add(prod.getStock());
+              modelo.addRow(renglon);
+            }
+        }
+    }//GEN-LAST:event_jcRubroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,7 +8,7 @@ import Entidades.Producto;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.HashSet;
+import java.util.TreeSet;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * @author virfe
  */
 public class Menu extends javax.swing.JFrame {
- private HashSet<Producto> productos = new HashSet<>();
+ private TreeSet<Producto> productos = new TreeSet<>();
  
     public Menu() {
         initComponents();
@@ -131,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
     private void jmConsRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsRubroActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        ConsRubro cr = new ConsRubro();
+        ConsRubro cr = new ConsRubro(productos);
         cr.setVisible(true);
         cr.setLocation(200, 100);
         Escritorio.add(cr);
@@ -141,7 +141,7 @@ public class Menu extends javax.swing.JFrame {
     private void jmConsNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsNombreActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        ConsNombre cn = new ConsNombre();
+        ConsNombre cn = new ConsNombre(productos);
         cn.setVisible(true);
         cn.setLocation(200, 100);
         Escritorio.add(cn);

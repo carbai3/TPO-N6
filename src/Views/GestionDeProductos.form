@@ -35,16 +35,23 @@
                       </Group>
                       <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jcRubro" max="32767" attributes="0"/>
-                              <Component id="jtCodigo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jtPrecio" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jtStock" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtCodigo" alignment="0" pref="101" max="32767" attributes="0"/>
+                                      <Component id="jtPrecio" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jtStock" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jtDescripcion" min="-2" pref="204" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <Component id="jbBuscar" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jtDescripcion" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jcRubro" min="-2" pref="129" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
-                      <Component id="jbBuscar" min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
@@ -197,9 +204,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="Comestible"/>
+            <StringItem index="0" value="Comestibles"/>
             <StringItem index="1" value="Limpieza"/>
-            <StringItem index="2" value="Perfumer&#xed;a"/>
+            <StringItem index="2" value="Perfumeria"/>
           </StringArray>
         </Property>
       </Properties>

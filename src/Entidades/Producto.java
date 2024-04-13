@@ -1,7 +1,7 @@
 
 package Entidades;
 
-public class Producto {
+public class Producto implements Comparable<Producto> {
     private int codigo;
     private String descripcion;
     private Double precio;
@@ -58,6 +58,27 @@ public class Producto {
     public void setRubro(String rubro) {
         this.rubro = rubro;
     }
-    
-    
+
+    @Override
+       public String toString(){
+   
+       return codigo+" "+descripcion;
+   }
+    @Override
+    public int compareTo(Producto t) {
+        //0-->iguales
+        //1-->mayor
+        //-1-->menor
+        if(this.codigo==t.codigo){
+            
+            return 0;
+            
+        }else if(this.codigo >t.codigo){
+        
+            return 1;
+        }else {
+        
+            return -1;
+        }
+    }
 }
