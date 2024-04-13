@@ -151,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
     private void jmConsPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsPrecioActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        ConsPrecio cp = new ConsPrecio();
+        ConsPrecio cp = new ConsPrecio(productos);
         cp.setVisible(true);
         cp.setLocation(200, 100);
         Escritorio.add(cp);

@@ -283,6 +283,7 @@ private void configurarBotones() {
             String descripcion;
             double precio;
             int stock;
+            String rubro;
 
             int codigoABuscar = Integer.parseInt(codigoTexto); // Convertir el texto a un número entero
 
@@ -306,6 +307,10 @@ private void configurarBotones() {
                 stock = productoEncontrado.getStock();
                 String stockEncontrado = String.valueOf(stock);
                 jtStock.setText(stockEncontrado);
+                
+                rubro = productoEncontrado.getRubro();
+                String rubroEncontrado = String.valueOf(rubro);
+                jcRubro.setSelectedItem(rubroEncontrado);
 
                 JOptionPane.showMessageDialog(null, "Producto encontrado: ");
             } else {

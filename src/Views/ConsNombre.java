@@ -7,6 +7,7 @@ package Views;
 
 import Entidades.Producto;
 import java.util.TreeSet;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,28 +15,37 @@ import javax.swing.table.DefaultTableModel;
  * @author carba
  */
 public class ConsNombre extends javax.swing.JInternalFrame {
-private TreeSet<Producto> productos;
-private DefaultTableModel modelo = new DefaultTableModel();
+
+    private TreeSet<Producto> productos;
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form ConsRubro
      */
-    public ConsNombre(TreeSet <Producto> productos) {
+    public ConsNombre(TreeSet<Producto> productos) {
         initComponents();
-        this.productos=productos;
+        this.productos = productos;
+        armarCabecera();
     }
-   private void armarCabecera(){
+
+    private void armarCabecera() {
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
-     
+        modelo.addColumn("Rubro");
+        jtTabla.setModel(modelo);
+        
+
     }
-    public void borrarFilasTabla(){
-        int filas = modelo.getRowCount()-1;
+
+    public void borrarFilasTabla() {
+        int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
-    } 
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +58,7 @@ private DefaultTableModel modelo = new DefaultTableModel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
         jtCaractBuscar = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -56,7 +66,8 @@ private DefaultTableModel modelo = new DefaultTableModel();
 
         jLabel2.setText("Escriba los primeros caracteres");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setForeground(new java.awt.Color(0, 51, 204));
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,13 +78,9 @@ private DefaultTableModel modelo = new DefaultTableModel();
                 "Codigo", "Descripcion", "Precio", "Stock"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtTabla);
 
-        jtCaractBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCaractBuscarActionPerformed(evt);
-            }
-        });
+        jtCaractBuscar.setForeground(new java.awt.Color(0, 51, 255));
         jtCaractBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtCaractBuscarKeyReleased(evt);
@@ -116,20 +123,32 @@ private DefaultTableModel modelo = new DefaultTableModel();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtCaractBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCaractBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCaractBuscarActionPerformed
-
     private void jtCaractBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCaractBuscarKeyReleased
-        
-    }//GEN-LAST:event_jtCaractBuscarKeyReleased
+        borrarFilasTabla();
 
+        String find = jtCaractBuscar.getText().toLowerCase();
+
+        for (Producto prod : productos) {
+
+            if (prod.getDescripcion().toLowerCase().startsWith(find)) {
+
+                Vector renglon=new Vector<>();
+                renglon.add(prod.getCodigo());
+                renglon.add(prod.getDescripcion());
+                renglon.add(prod.getPrecio());
+                renglon.add(prod.getStock());
+                renglon.add(prod.getRubro());
+                modelo.addRow(renglon);
+                System.out.println(renglon);
+    }//GEN-LAST:event_jtCaractBuscarKeyReleased
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jtCaractBuscar;
+    private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
 }
