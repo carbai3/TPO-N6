@@ -318,8 +318,7 @@ private void configurarBotones() {
             }
 
         } catch (NumberFormatException e) {
-            // Si ocurre una excepción al intentar convertir el texto a un número entero,
-            // mostrar un mensaje de error
+      
             JOptionPane.showMessageDialog(null, "Campo vacío o valor inválido. Ingrese un número válido.");
         }
 
