@@ -246,7 +246,7 @@ private void configurarBotones() {
 
         if (productos.add(prod)) {
             JOptionPane.showMessageDialog(this, "Producto Guardado");
-            limpiarCampos();
+           
         } else {
             JOptionPane.showMessageDialog(this, "Producto existente con ese codigo");
         }
